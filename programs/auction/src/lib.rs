@@ -83,7 +83,7 @@ pub mod auction {
             let current_time = get_current_time()?;
 
             require!(
-                current_time < a_pool.start_time,
+                current_time < a_pool.start_time || ( a_pool.count == 0 &&  current_time > a_pool.end_time) ,
                 AuctionError::StartedAuction
             );
 

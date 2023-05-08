@@ -3,7 +3,6 @@ use anchor_lang::prelude::Pubkey;
 pub const POOL_SEED: &str = "pool";
 
 pub const ADMIN_KEY: Pubkey = anchor_lang::solana_program::pubkey!("3ttYrBAp5D2sTG2gaBjg8EtrZecqBQSBuFRhsqHWPYxX"); 
-pub const SET_WINNER_KEY: Pubkey = anchor_lang::solana_program::pubkey!("3ttYrBAp5D2sTG2gaBjg8EtrZecqBQSBuFRhsqHWPYxX"); 
 pub const MAX_BUYER_COUNT: usize = 100;
 pub const MAX_TOTAL_TICKET: u32 = 1000000000;
 pub const MAX_RAFFLE_ID_LEN: usize = 50;

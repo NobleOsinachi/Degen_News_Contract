@@ -95,7 +95,7 @@ pub mod raffle {
             
             let current_time = get_current_time()?;
             require!(
-                current_time < a_pool.start_time,
+                current_time < a_pool.start_time || (current_time > a_pool.end_time && a_pool.purchased_ticket == 0  ) ,
                 RaffleError::StartedRaffle
             );
     
