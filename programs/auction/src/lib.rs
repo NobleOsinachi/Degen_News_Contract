@@ -184,7 +184,6 @@ pub mod auction {
     pub fn cancel_bid(ctx: Context<CancelBidContext>) -> Result<()> {
         let mut price: u64 = 0;
         {
-
             let mut a_pool = ctx.accounts.pool.load_mut()?;
             let a_bidder = &ctx.accounts.bidder;
 
@@ -287,7 +286,7 @@ pub mod auction {
             if a_pool.state == 0 {
                 let result = a_pool.set_winner()?;
                 require!(result, AuctionError::SetWinnerError);
-                a_pool.state = 1;
+                a_pool.state = 2;
             }
     
             let result = a_pool.claim_prize(a_bidder.to_account_info().key())?;
