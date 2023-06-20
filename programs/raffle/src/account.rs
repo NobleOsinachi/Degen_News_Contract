@@ -70,6 +70,8 @@ impl Pool {
     else {
       self.buyers[index].purchased_ticket += amount;
     }
+
+
     self.purchased_ticket += amount;
     Ok(())
   }
@@ -78,13 +80,15 @@ impl Pool {
     let rand = random.checked_rem(self.purchased_ticket as u64).unwrap() as u32;
     let mut start: u32 = 0;
     let mut winner: usize = 0;
+    
     for i in 0..self.count as usize {
-      if self.buyers[i].purchased_ticket >= start && self.buyers[i].purchased_ticket <= rand {
+      start = self.buyers[i].purchased_ticket;
+      if start >= 0 && start >= rand {
         winner = i;
         break;
       }
-      start += self.buyers[i].purchased_ticket;
     }
+
     self.buyers[winner].is_winner = 1;
 
     Ok(())
