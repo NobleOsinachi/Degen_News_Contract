@@ -2,7 +2,7 @@
 seeds = false
 skip-lint = false
 [programs.devnet]
-raffle = "HtWavE8Erfsho7v4RJzr8XSEYD79iN686RxHNGoxcUz7"
+raffle = "9XmsktwqP1zuPTGhfCgSKVBh5HHKVbiCqeRqzCY8qpB"
 auction = "Hs3t9gHpLzrSA21eZnuQt6C9GMMTWmgrYynWLZA1K7pe"
 
 [registry]
