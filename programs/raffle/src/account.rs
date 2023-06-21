@@ -82,7 +82,7 @@ impl Pool {
     let mut winner: usize = 0;
     
     for i in 0..self.count as usize {
-      start = self.buyers[i].purchased_ticket;
+      start += self.buyers[i].purchased_ticket;
       if start >= 0 && start >= rand {
         winner = i;
         break;
