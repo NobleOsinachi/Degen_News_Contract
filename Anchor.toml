@@ -1,7 +1,7 @@
 [features]
 seeds = false
 skip-lint = false
-[programs.mainnet]
+[programs.devnet]
 raffle = "HtWavE8Erfsho7v4RJzr8XSEYD79iN686RxHNGoxcUz7"
 auction = "Hs3t9gHpLzrSA21eZnuQt6C9GMMTWmgrYynWLZA1K7pe"
 
@@ -9,8 +9,8 @@ auction = "Hs3t9gHpLzrSA21eZnuQt6C9GMMTWmgrYynWLZA1K7pe"
 url = "https://api.apr.dev"
 
 [provider]
-cluster = "https://capable-burned-shape.solana-mainnet.quiknode.pro/904288623a1e9c412e5da6f5204baa74aa652938/"
-wallet = "/home/soso/devnet.json"
+cluster = "https://api.devnet.solana.com"
+wallet = "/home/messi/devnet.json"
 
 [scripts]
 test = "yarn run ts-mocha -p ./tsconfig.json -t 1000000 tests/**/*.ts"
