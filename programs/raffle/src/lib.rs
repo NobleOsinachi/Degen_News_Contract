@@ -181,7 +181,7 @@ pub mod raffle {
         msg!("a_pool.purchased_ticket: {}", a_pool.purchased_ticket);
         msg!("a_pool.state: {}", a_pool.state);
 
-        require!(a_pool.purchased_ticket >= 0, RaffleError::SetWinnerError);
+        require!(a_pool.purchased_ticket > 0, RaffleError::SetWinnerError);
         require!(a_pool.state == 0, RaffleError::AlreadySetWinner);
         
         let random = u64::from_le_bytes(
