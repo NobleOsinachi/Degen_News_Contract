@@ -1,6 +1,5 @@
 use anchor_lang::prelude::*;
 use anchor_spl::token::{self};
-use spl_token_metadata::state::Metadata;
 
 pub mod contexts;
 pub mod utils;
@@ -168,7 +167,7 @@ pub mod raffle {
             .count()
             == 0;
 
-        let count = get_nft_count({
+        let count = get_nft_count(GetNFTCount {
             owner: a_buyer,
             mint_account: a_pool.mint,
             token_program: ctx.accounts.token_program.clone()
