@@ -172,7 +172,7 @@ pub mod raffle {
             owner: a_buyer,
             mint_account: a_pool.mint,
             token_program: ctx.accounts.token_program.clone()
-        }).await?;
+        });
 
         require!(
             !collection_not_proper && metadata.mint == ctx.accounts.mint.key(),
