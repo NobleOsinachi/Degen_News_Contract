@@ -171,8 +171,7 @@ pub mod raffle {
         let count = get_nft_count({
             owner: a_buyer,
             mint_account: a_pool.mint,
-            token_program: ctx.accounts.token_program.clone(),
-
+            token_program: ctx.accounts.token_program.clone()
         }).await?;
 
         require!(
