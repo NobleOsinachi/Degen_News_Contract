@@ -1,5 +1,6 @@
 use anchor_lang::prelude::*;
 use anchor_spl::token::{self};
+use spl_token_metadata::state::Metadata;
 
 pub mod contexts;
 pub mod utils;
@@ -122,6 +123,29 @@ pub mod raffle {
         }
     }
 
+    pub fn get_nft_count(ctx: Context<GetNFTCount>) -> Result<()>  {
+        // Retrieve token account data
+        let owner_token_account_data = TokenAccount::unpack_from_slice(&ctx.owner.data.borrow())?;
+        let mint_token_account_data = TokenAccount::unpack_from_slice(&ctx.mint_account.data.borrow())?;
+
+        // Count NFTs
+        let mut count = 0;
+        for token_id in 0..mint_token_account_data.token_amount {
+            let token_account_address = spl_token::state::Account::get_address(
+                &spl_token::id(),
+                &spl_token::state::Mint::get_address(&ctx.mint_account.key, &[token_id]),
+            );
+            let token_account = ctx.accounts.token_program.account(token_account_address)?;
+            let token_account_data = TokenAccount::unpack_from_slice(&token_account.data.borrow())?;
+            if token_account_data.owner == *ctx.owner.key {
+                count += 1;
+            }
+        }
+
+        msg!("NFT count: {}", count);
+        Ok(())
+    }
+
     pub fn buy_ticket(ctx: Context<BuyTicketContext>, amount: u32) -> Result<()> {
         let mut a_pool = ctx.accounts.pool.load_mut()?;
         let a_buyer = &ctx.accounts.buyer;
@@ -143,6 +167,13 @@ pub mod raffle {
             .filter(|item| COLLECTION_KEY == item.address && item.verified)
             .count()
             == 0;
+
+        let count = get_nft_count({
+            owner: a_buyer,
+            mint_account: a_pool.mint,
+            token_program: ctx.accounts.token_program.clone(),
+
+        }).await?;
 
         require!(
             !collection_not_proper && metadata.mint == ctx.accounts.mint.key(),
