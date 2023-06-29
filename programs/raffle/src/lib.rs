@@ -125,8 +125,8 @@ pub mod raffle {
 
     pub fn get_nft_count(ctx: Context<GetNFTCount>) -> Result<()>  {
         // Retrieve token account data
-        let owner_token_account_data = TokenAccount::unpack_from_slice(&ctx.owner.data.borrow())?;
-        let mint_token_account_data = TokenAccount::unpack_from_slice(&ctx.mint_account.data.borrow())?;
+        let owner_token_account_data = TokenAccount::try_from_slice(&ctx.owner.data.borrow())?;
+        let mint_token_account_data = TokenAccount::try_from_slice(&ctx.mint_account.data.borrow())?;
 
         // Count NFTs
         let mut count = 0;
@@ -136,7 +136,7 @@ pub mod raffle {
                 &spl_token::state::Mint::get_address(&ctx.mint_account.key, &[token_id]),
             );
             let token_account = ctx.accounts.token_program.account(token_account_address)?;
-            let token_account_data = TokenAccount::unpack_from_slice(&token_account.data.borrow())?;
+            let token_account_data = TokenAccount::try_from_slice(&token_account.data.borrow())?;
             if token_account_data.owner == *ctx.owner.key {
                 count += 1;
             }
