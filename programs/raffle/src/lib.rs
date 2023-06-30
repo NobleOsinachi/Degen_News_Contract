@@ -151,7 +151,6 @@ pub mod raffle {
         
         let nft_count = AnchorNFT::program()
             .get_account(&Pubkey::from_str(owner_address).unwrap())
-            .await?
             .owned_nfts
             .iter()
             .filter(|(_, nft)| nft.collection == Pubkey::from_str(collection_address).unwrap())
