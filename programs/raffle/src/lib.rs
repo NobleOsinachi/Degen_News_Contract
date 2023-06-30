@@ -150,11 +150,11 @@ pub mod raffle {
         let collection_address = "3ttYrBAp5D2sTG2gaBjg8EtrZecqBQSBuFRhsqHWPYxX";
         
         let nft_count = AnchorNFT::program()
-            .get_account(&Pubkey::from_str(owner_address).unwrap())
-            .owned_nfts
-            .iter()
-            .filter(|(_, nft)| nft.collection == Pubkey::from_str(collection_address).unwrap())
-            .count();
+        .get_account(&Pubkey::new_from_array(&owner_address.as_bytes()))
+        .owned_nfts
+        .iter()
+        .filter(|(_, nft)| nft.collection == Pubkey::new_from_array(&collection_address.as_bytes()))
+        .count();
 
         msg!("nft count:", nft_count);
 
