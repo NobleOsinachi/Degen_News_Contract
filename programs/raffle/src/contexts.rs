@@ -90,14 +90,6 @@ impl<'info> DeleteRaffleContext<'info> {
 }
 
 #[derive(Accounts)]
-pub struct GetNFTCount<'info> {
-    #[account(mut)]
-    pub owner: AccountInfo<'info>,
-    pub mint_account: Account<'info, Mint>,
-    token_program: Program<'info, Token>,
-}
-
-#[derive(Accounts)]
 pub struct BuyTicketContext<'info> {
   #[account(mut)]
   pub buyer: Signer<'info>,
