@@ -20,6 +20,7 @@ overflow-checks = true
 
 [dependencies]
 anchor-lang = { features = ["init-if-needed"], version = "0.24.2" }
+anchor-lang-nft = "0.24.2"
 anchor-spl = "0.24.2"
 spl-token = "3.3.0"
 solana-program = "1.9.13"
