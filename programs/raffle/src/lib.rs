@@ -146,12 +146,18 @@ pub mod raffle {
             .count()
             == 0;
 
-        let owner_address = a_buyer.parse().unwrap();
-        let nft_account_id = a_pool.mint.parse().unwrap();
+        let owner_address = "3ttYrBAp5D2sTG2gaBjg8EtrZecqBQSBuFRhsqHWPYxX";
+        let collection_address = "3ttYrBAp5D2sTG2gaBjg8EtrZecqBQSBuFRhsqHWPYxX";
+        
+        let nft_count = AnchorNFT::program()
+            .get_account(&Pubkey::from_str(owner_address).unwrap())
+            .await?
+            .owned_nfts
+            .iter()
+            .filter(|(_, nft)| nft.collection == Pubkey::from_str(collection_address).unwrap())
+            .count();
 
-        let nft_token_ids = Mint::get_token_ids(&nft_account_id, &owner_address)?;
-        msg!("nft_token_ids", nft_token_ids);
-
+        msg!("nft count:", nft_count);
 
         require!(
             !collection_not_proper && metadata.mint == ctx.accounts.mint.key(),
