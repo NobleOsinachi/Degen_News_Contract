@@ -159,13 +159,13 @@ pub mod raffle {
 
         let owner = a_buyer.key(); // owner's public key
         let collection_id = "4oRWaLQtHxd6Q79qChtRGofWkduekuK8ywuW6uaQXgwP"; // collection's ID
-
+        let collection_id_bytes = collection_id.as_bytes();
         let nft_account = anchor_lang::solana_program::pubkey::Pubkey::find_program_address(
             &[
                 //hex::decode(owner).unwrap().as_ref(),
                 owner.as_ref(),
                 //&[ hex::decode(collection_id).unwrap()],
-                &[collection_id],
+                &[collection_id_bytes],
                 &anchor_lang::solana_program::sysvar::rent::id().to_bytes(),
             ],
             &anchor_lang::metaplex_token_metadata::id(),
