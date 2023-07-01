@@ -168,7 +168,7 @@ pub mod raffle {
                 collection_id_bytes,
                 &anchor_lang::solana_program::sysvar::rent::id().to_bytes(),
             ],
-            &anchor_lang::metaplex_token_metadata::id(),
+            &mpl_token_metadata::id(),
         ).0;
 
         let nft_account_info = ctx.accounts.to_account_info(&nft_account)?;
