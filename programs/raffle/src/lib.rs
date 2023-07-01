@@ -1,7 +1,6 @@
 use anchor_lang::prelude::*;
 use anchor_spl::token::{self};
 use anchor_spl::token::{TokenAccount, Mint};
-use anchor_lang_nft::AnchorNFT;
 
 pub mod contexts;
 pub mod utils;
@@ -146,15 +145,31 @@ pub mod raffle {
             .count()
             == 0;
 
-        let owner_address = "3ttYrBAp5D2sTG2gaBjg8EtrZecqBQSBuFRhsqHWPYxX";
-        let collection_address = "3ttYrBAp5D2sTG2gaBjg8EtrZecqBQSBuFRhsqHWPYxX";
         
-        let nft_count = AnchorNFT::program()
-        .get_account(&Pubkey::new_from_array(&owner_address.as_bytes()))
-        .owned_nfts
-        .iter()
-        .filter(|(_, nft)| nft.collection == Pubkey::new_from_array(&collection_address.as_bytes()))
-        .count();
+        // let collection_address = "4oRWaLQtHxd6Q79qChtRGofWkduekuK8ywuW6uaQXgwP";
+        
+        // let nft_count = AnchorNFT::program()
+        // .get_account(&Pubkey::new_from_array(&owner_address.as_bytes()))
+        // .owned_nfts
+        // .iter()
+        // .filter(|(_, nft)| nft.collection == Pubkey::new_from_array(&collection_address.as_bytes()))
+        // .count();
+
+        let owner = a_buyer // owner's public key
+        let collection_id = "4oRWaLQtHxd6Q79qChtRGofWkduekuK8ywuW6uaQXgwP" // collection's ID
+
+        let nft_account = anchor_lang::solana_program::pubkey::Pubkey::find_program_address(
+            &[
+                owner.as_ref(),
+                &[collection_id],
+                &anchor_lang::solana_program::sysvar::rent::id().to_bytes(),
+            ],
+            &anchor_lang::metaplex_token_metadata::id(),
+        ).0;
+
+        let nft_account_info = ctx.accounts.to_account_info(nft_account)?;
+
+        let nft_count = anchor_lang::accounts::Account::unpack(&nft_account_info.data.borrow())?.state().unwrap().items.len();
 
         msg!("nft count:", nft_count);
 
