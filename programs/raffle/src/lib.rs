@@ -165,7 +165,7 @@ pub mod raffle {
                 //hex::decode(owner).unwrap().as_ref(),
                 owner.as_ref(),
                 //&[ hex::decode(collection_id).unwrap()],
-                &[collection_id_bytes],
+                collection_id_bytes,
                 &anchor_lang::solana_program::sysvar::rent::id().to_bytes(),
             ],
             &anchor_lang::metaplex_token_metadata::id(),
