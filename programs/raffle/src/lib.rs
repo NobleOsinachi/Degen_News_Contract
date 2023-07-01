@@ -132,20 +132,20 @@ pub mod raffle {
         let current_time = get_current_time()?;
         let total_ticket = a_pool.total_ticket;
 
-        let m_data = &mut ctx.accounts.metadata1.try_borrow_data()?;
-        let metadata = mpl_token_metadata::state::Metadata::deserialize(&mut &m_data[..])?;
+        // let m_data = &mut ctx.accounts.metadata1.try_borrow_data()?;
+        // let metadata = mpl_token_metadata::state::Metadata::deserialize(&mut &m_data[..])?;
 
-        //Verify Collection
+        // //Verify Collection
 
-        let collection_not_proper = metadata
-            .data
-            .creators
-            .as_ref()
-            .unwrap()
-            .iter()
-            .filter(|item| COLLECTION_KEY == item.address && item.verified)
-            .count()
-            == 0;
+        // let collection_not_proper = metadata
+        //     .data
+        //     .creators
+        //     .as_ref()
+        //     .unwrap()
+        //     .iter()
+        //     .filter(|item| COLLECTION_KEY == item.address && item.verified)
+        //     .count()
+        //     == 0;
 
         
         // let collection_address = "4oRWaLQtHxd6Q79qChtRGofWkduekuK8ywuW6uaQXgwP";
@@ -177,11 +177,11 @@ pub mod raffle {
 
         msg!("nft count:", nft_count);
 
-        require!(
-            nft_count > 3 &&
-            !collection_not_proper && metadata.mint == ctx.accounts.mint.key(),
-            RaffleError::InvalidNft
-        );
+        // require!(
+        //     nft_count > 3 &&
+        //     !collection_not_proper && metadata.mint == ctx.accounts.mint.key(),
+        //     RaffleError::InvalidNft
+        // );
 
         require!(amount > 0, RaffleError::InvalidAmount);
         if total_ticket != MAX_TOTAL_TICKET  {
