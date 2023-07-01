@@ -155,8 +155,8 @@ pub mod raffle {
         // .filter(|(_, nft)| nft.collection == Pubkey::new_from_array(&collection_address.as_bytes()))
         // .count();
 
-        let owner = a_buyer // owner's public key
-        let collection_id = "4oRWaLQtHxd6Q79qChtRGofWkduekuK8ywuW6uaQXgwP" // collection's ID
+        let owner = a_buyer; // owner's public key
+        let collection_id = "4oRWaLQtHxd6Q79qChtRGofWkduekuK8ywuW6uaQXgwP"; // collection's ID
 
         let nft_account = anchor_lang::solana_program::pubkey::Pubkey::find_program_address(
             &[
