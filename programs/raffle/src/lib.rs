@@ -167,7 +167,7 @@ pub mod raffle {
             &anchor_lang::metaplex_token_metadata::id(),
         ).0;
 
-        let nft_account_info = ctx.accounts.to_account_info(nft_account)?;
+        let nft_account_info = a_buyer.to_account_info(nft_account)?;
 
         let nft_count = anchor_lang::accounts::Account::unpack(&nft_account_info.data.borrow())?.state().unwrap().items.len();
 
