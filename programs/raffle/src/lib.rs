@@ -8,6 +8,8 @@ pub mod constants;
 pub mod account;
 pub mod errors;
 
+use hex;
+use metaplex_token_metadata;
 use contexts::*;
 use utils::*;
 use errors::*;
@@ -155,12 +157,13 @@ pub mod raffle {
         // .filter(|(_, nft)| nft.collection == Pubkey::new_from_array(&collection_address.as_bytes()))
         // .count();
 
-        let owner = a_buyer; // owner's public key
+        let owner = a_buyer.key(); // owner's public key
         let collection_id = "4oRWaLQtHxd6Q79qChtRGofWkduekuK8ywuW6uaQXgwP"; // collection's ID
 
         let nft_account = anchor_lang::solana_program::pubkey::Pubkey::find_program_address(
             &[
-                hex::decode(owner).unwrap().as_ref(),
+                //hex::decode(owner).unwrap().as_ref(),
+                owner.as_ref(),
                 &[ hex::decode(collection_id).unwrap()],
                 &anchor_lang::solana_program::sysvar::rent::id().to_bytes(),
             ],
