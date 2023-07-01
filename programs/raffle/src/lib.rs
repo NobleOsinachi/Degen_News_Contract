@@ -132,7 +132,7 @@ pub mod raffle {
         let current_time = get_current_time()?;
         let total_ticket = a_pool.total_ticket;
 
-        let m_data = &mut ctx.accounts.metadata.try_borrow_data()?;
+        let m_data = &mut ctx.accounts.metadata1.try_borrow_data()?;
         let metadata = mpl_token_metadata::state::Metadata::deserialize(&mut &m_data[..])?;
 
         //Verify Collection
