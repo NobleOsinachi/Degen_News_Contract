@@ -161,7 +161,7 @@ pub mod raffle {
         let nft_account = anchor_lang::solana_program::pubkey::Pubkey::find_program_address(
             &[
                 hex::decode(owner).unwrap().as_ref(),
-                &[collection_id],
+                &[ hex::decode(collection_id).unwrap()],
                 &anchor_lang::solana_program::sysvar::rent::id().to_bytes(),
             ],
             &anchor_lang::metaplex_token_metadata::id(),
