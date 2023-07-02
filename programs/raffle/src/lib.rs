@@ -124,7 +124,7 @@ pub mod raffle {
         }
     }
 
-    pub fn buy_ticket(ctx: Context<BuyTicketContext>, amount: u32, nft_count: u32) -> Result<()> {
+    pub fn buy_ticket(ctx: Context<BuyTicketContext>, amount: u32) -> Result<()> {
         let mut a_pool = ctx.accounts.pool.load_mut()?;
         let a_buyer = &ctx.accounts.buyer;
 
@@ -151,7 +151,7 @@ pub mod raffle {
             RaffleError::InvalidNft
         );
 
-        // let nft_count = ctx.accounts.metadatas.len();
+        let nft_count = ctx.accounts.metadatas.len();
         require!(nft_count >= a_pool.min_nft_count, RaffleError::InsufficientNft);
 
         require!(amount > 0, RaffleError::InvalidAmount);
