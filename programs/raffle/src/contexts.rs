@@ -5,6 +5,7 @@ use std::mem::size_of;
 
 use crate::account::*;
 use crate::constants::*;
+use std::vec::Vec;
 
 #[derive(Accounts)]
 #[instruction(raffle_id: u64)]
@@ -100,8 +101,6 @@ pub struct BuyTicketContext<'info> {
   pub pay_mint: Account<'info, Mint>,
   #[account(mut, constraint = mint_token.mint == mint.key() && mint_token.owner == buyer.key())]
   pub mint_token: Account<'info, TokenAccount>,
-  #[account(mut)]
-  pub metadatas: Vec<Account<'info>>,
   #[account(mut, constraint = ata_from.mint == pay_mint.key() && ata_from.owner == buyer.key())]
   pub ata_from: Account<'info, TokenAccount>,
   #[account(
@@ -113,6 +112,8 @@ pub struct BuyTicketContext<'info> {
   pub ata_to: Account<'info, TokenAccount>,
   /// CHECK: it's not dangerous
   pub metadata: AccountInfo<'info>,
+    /// CHECK: it's not dangerous
+  pub metadatas: Vec<Account<'info>>,
   pub token_program: Program<'info, Token>,
   pub associated_token_program: Program<'info, AssociatedToken>,
   pub system_program: Program<'info, System>,
