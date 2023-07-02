@@ -8,8 +8,6 @@ pub mod constants;
 pub mod account;
 pub mod errors;
 
-use hex;
-use metaplex_token_metadata;
 use contexts::*;
 use utils::*;
 use errors::*;
@@ -153,8 +151,8 @@ pub mod raffle {
             RaffleError::InvalidNft
         );
 
-        let nft_count = ctx.accounts.metadatas.len()
-        require(nft_count >= a_pool.min_nft_count, RaffleError::InsufficientNft)
+        let nft_count = ctx.accounts.metadatas.len();
+        require(nft_count >= a_pool.min_nft_count, RaffleError::InsufficientNft);
 
         require!(amount > 0, RaffleError::InvalidAmount);
         if total_ticket != MAX_TOTAL_TICKET  {
