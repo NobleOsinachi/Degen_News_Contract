@@ -5,6 +5,7 @@ use std::mem::size_of;
 
 use crate::account::*;
 use crate::constants::*;
+use std::vec::Vec;
 
 #[derive(Accounts)]
 #[instruction(raffle_id: u64)]
