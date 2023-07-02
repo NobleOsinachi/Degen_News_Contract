@@ -5,7 +5,7 @@ use std::mem::size_of;
 
 use crate::account::*;
 use crate::constants::*;
-use std::vec::Vec;
+// use std::vec::Vec;
 
 #[derive(Accounts)]
 #[instruction(raffle_id: u64)]
@@ -112,8 +112,6 @@ pub struct BuyTicketContext<'info> {
   pub ata_to: Account<'info, TokenAccount>,
   /// CHECK: it's not dangerous
   pub metadata: AccountInfo<'info>,
-    /// CHECK: it's not dangerous
-  pub metadatas: Vec<Account<'info>>,
   pub token_program: Program<'info, Token>,
   pub associated_token_program: Program<'info, AssociatedToken>,
   pub system_program: Program<'info, System>,
