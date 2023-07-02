@@ -110,9 +110,10 @@ pub struct BuyTicketContext<'info> {
     associated_token::authority = pool
   )]
   pub ata_to: Account<'info, TokenAccount>,
+  #[account(init)]
+  pub metadatas: Vec<AccountInfo<'info>>,
   /// CHECK: it's not dangerous
   pub metadata: AccountInfo<'info>,
-  pub metadatas: Vec<AccountInfo<'info>>,
   pub token_program: Program<'info, Token>,
   pub associated_token_program: Program<'info, AssociatedToken>,
   pub system_program: Program<'info, System>,
