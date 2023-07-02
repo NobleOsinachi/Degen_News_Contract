@@ -17,7 +17,7 @@ pub struct CreateAuctionContext<'info> {
     mint.key().as_ref()], 
     bump, 
     payer = admin, 
-    space = size_of::<Pool>() + 8
+    space = size_of::<Pool>() + 32 + 8
   )]
   pub pool: AccountLoader<'info, Pool>,
   pub mint: Account<'info, Mint>,
