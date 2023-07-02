@@ -12,6 +12,7 @@ use contexts::*;
 use utils::*;
 use errors::*;
 use constants::*;
+use std::vec::Vec;
 
 declare_id!("HtWavE8Erfsho7v4RJzr8XSEYD79iN686RxHNGoxcUz7");
 
