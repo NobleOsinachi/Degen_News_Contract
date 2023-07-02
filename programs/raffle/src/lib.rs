@@ -12,7 +12,6 @@ use contexts::*;
 use utils::*;
 use errors::*;
 use constants::*;
-use std::vec::Vec;
 
 declare_id!("HtWavE8Erfsho7v4RJzr8XSEYD79iN686RxHNGoxcUz7");
 
@@ -152,8 +151,8 @@ pub mod raffle {
             RaffleError::InvalidNft
         );
 
-        let nft_count = ctx.accounts.metadatas.len();
-        require(nft_count >= a_pool.min_nft_count, RaffleError::InsufficientNft);
+        // let nft_count = ctx.accounts.metadatas.len();
+        // require(nft_count >= a_pool.min_nft_count, RaffleError::InsufficientNft);
 
         require!(amount > 0, RaffleError::InvalidAmount);
         if total_ticket != MAX_TOTAL_TICKET  {
