@@ -132,7 +132,7 @@ pub mod auction {
             AuctionError::OverMaxCount
         );
 
-        require!(nft_count >= a_pool.min_nft_count, RaffleError::InsufficientNft);
+        require!(nft_count >= a_pool.min_nft_count, AuctionError::InsufficientNft);
 
         token::transfer(ctx.accounts.transfer_context(), price)?;
 
@@ -163,7 +163,7 @@ pub mod auction {
             old_price = a_pool.update_bid(a_bidder.to_account_info().key(), price)?;
             require!(old_price != 0, AuctionError::UpdateBidError);
             
-            require!(nft_count >= a_pool.min_nft_count, RaffleError::InsufficientNft);
+            require!(nft_count >= a_pool.min_nft_count, AuctionError::InsufficientNft);
         }
         {
             let a_pool = ctx.accounts.pool.load()?;
