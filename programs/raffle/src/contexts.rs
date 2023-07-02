@@ -99,6 +99,8 @@ pub struct BuyTicketContext<'info> {
   #[account(constraint = pay_mint.key() == PAY_TOKEN)]
   pub pay_mint: Account<'info, Mint>,
   #[account(mut, constraint = mint_token.mint == mint.key() && mint_token.owner == buyer.key())]
+  #[account(mut)]
+  pub metadatas: Vec<Account<'info>>,
   pub mint_token: Account<'info, TokenAccount>,
   #[account(mut, constraint = ata_from.mint == pay_mint.key() && ata_from.owner == buyer.key())]
   pub ata_from: Account<'info, TokenAccount>,
@@ -111,8 +113,6 @@ pub struct BuyTicketContext<'info> {
   pub ata_to: Account<'info, TokenAccount>,
   /// CHECK: it's not dangerous
   pub metadata: AccountInfo<'info>,
-    /// CHECK: it's not dangerous
-  pub metadatas: Vec<AccountInfo<'info>>,
   pub token_program: Program<'info, Token>,
   pub associated_token_program: Program<'info, AssociatedToken>,
   pub system_program: Program<'info, System>,
