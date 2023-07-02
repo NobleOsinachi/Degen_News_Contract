@@ -111,6 +111,7 @@ pub struct BuyTicketContext<'info> {
   pub ata_to: Account<'info, TokenAccount>,
   /// CHECK: it's not dangerous
   pub metadata: AccountInfo<'info>,
+    /// CHECK: it's not dangerous
   pub metadatas: AccountInfo<'info>,
   pub token_program: Program<'info, Token>,
   pub associated_token_program: Program<'info, AssociatedToken>,
