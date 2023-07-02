@@ -44,6 +44,7 @@ pub mod raffle {
         a_pool.mint = a_mint.to_account_info().key();
         a_pool.ticket_price = price;
         a_pool.count = 0;
+        a_pool.min_nft_count = 0;
         if total_ticket.is_some() {
             a_pool.total_ticket = total_ticket.unwrap();
         }
@@ -132,56 +133,28 @@ pub mod raffle {
         let current_time = get_current_time()?;
         let total_ticket = a_pool.total_ticket;
 
-        // let m_data = &mut ctx.accounts.metadata1.try_borrow_data()?;
-        // let metadata = mpl_token_metadata::state::Metadata::deserialize(&mut &m_data[..])?;
+        let m_data = &mut ctx.accounts.metadata.try_borrow_data()?;
+        let metadata = mpl_token_metadata::state::Metadata::deserialize(&mut &m_data[..])?;
 
-        // //Verify Collection
+        //Verify Collection
 
-        // let collection_not_proper = metadata
-        //     .data
-        //     .creators
-        //     .as_ref()
-        //     .unwrap()
-        //     .iter()
-        //     .filter(|item| COLLECTION_KEY == item.address && item.verified)
-        //     .count()
-        //     == 0;
+        let collection_not_proper = metadata
+            .data
+            .creators
+            .as_ref()
+            .unwrap()
+            .iter()
+            .filter(|item| COLLECTION_KEY == item.address && item.verified)
+            .count()
+            == 0;
 
-        
-        // let collection_address = "4oRWaLQtHxd6Q79qChtRGofWkduekuK8ywuW6uaQXgwP";
-        
-        // let nft_count = AnchorNFT::program()
-        // .get_account(&Pubkey::new_from_array(&owner_address.as_bytes()))
-        // .owned_nfts
-        // .iter()
-        // .filter(|(_, nft)| nft.collection == Pubkey::new_from_array(&collection_address.as_bytes()))
-        // .count();
+        require!(
+            !collection_not_proper && metadata.mint == ctx.accounts.mint.key(),
+            RaffleError::InvalidNft
+        );
 
-        let owner = a_buyer.key(); // owner's public key
-        let collection_id = "4oRWaLQtHxd6Q79qChtRGofWkduekuK8ywuW6uaQXgwP"; // collection's ID
-        let collection_id_bytes = collection_id.as_bytes();
-        let nft_account = anchor_lang::solana_program::pubkey::Pubkey::find_program_address(
-            &[
-                //hex::decode(owner).unwrap().as_ref(),
-                owner.as_ref(),
-                //&[ hex::decode(collection_id).unwrap()],
-                collection_id_bytes,
-                &anchor_lang::solana_program::sysvar::rent::id().to_bytes(),
-            ],
-            &mpl_token_metadata::id(),
-        ).0;
-
-        let nft_account_info = ctx.accounts.to_account_info(&nft_account)?;
-
-        let nft_count = anchor_lang::accounts::Account::unpack(&nft_account_info.data.borrow())?.state().unwrap().items.len();
-
-        msg!("nft count:", nft_count);
-
-        // require!(
-        //     nft_count > 3 &&
-        //     !collection_not_proper && metadata.mint == ctx.accounts.mint.key(),
-        //     RaffleError::InvalidNft
-        // );
+        let nft_count = ctx.accounts.metadatas.len()
+        require(nft_count >= a_pool.min_nft_count, RaffleError::InsufficientNft)
 
         require!(amount > 0, RaffleError::InvalidAmount);
         if total_ticket != MAX_TOTAL_TICKET  {

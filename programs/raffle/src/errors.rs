@@ -6,6 +6,8 @@ pub enum RaffleError {
     InvalidAmount,
     #[msg("Invalid NFT")]
     InvalidNft,
+    #[msg("Insufficient NFT")]
+    InsufficientNft,
     #[msg("Raffle isn't finished")]
     NotFinishRaffle,
     #[msg("Over max count")]
