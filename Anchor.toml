@@ -2,8 +2,8 @@
 seeds = false
 skip-lint = false
 [programs.devnet]
-raffle = "ptvP9J88J9bDaLJZ7VL3AkkKXvzJ6jJaCBiCxSPCzoR"
-auction = "BvyuWMB2nUGZtKoZiE5yUDjuguhKiRoXi2X8aj7xv4nR"
+raffle = "9XmsktwqP1zuPTGhfCgSKVBh5HHKVbiCqeRqzCY8qpB"
+auction = "2pKctoN7q3VoqWq78BKLGdwmGfzE2UHrPphqTm4D7pjH"
 
 [registry]
 url = "https://api.apr.dev"

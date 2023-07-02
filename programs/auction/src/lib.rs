@@ -12,7 +12,7 @@ use utils::*;
 use errors::*;
 use constants::*;
 
-declare_id!("BvyuWMB2nUGZtKoZiE5yUDjuguhKiRoXi2X8aj7xv4nR");
+declare_id!("2pKctoN7q3VoqWq78BKLGdwmGfzE2UHrPphqTm4D7pjH");
 
 #[program]
 pub mod auction {

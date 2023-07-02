@@ -14,7 +14,7 @@ use errors::*;
 use constants::*;
 // use std::vec::Vec;
 
-declare_id!("ptvP9J88J9bDaLJZ7VL3AkkKXvzJ6jJaCBiCxSPCzoR");
+declare_id!("9XmsktwqP1zuPTGhfCgSKVBh5HHKVbiCqeRqzCY8qpB");
 
 #[program]
 pub mod raffle {
