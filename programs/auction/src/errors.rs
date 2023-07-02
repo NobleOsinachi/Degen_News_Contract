@@ -31,5 +31,7 @@ pub enum AuctionError {
     #[msg("Error in set winner")]
     SetWinnerError,
     #[msg("Auction already started")]
-    StartedAuction
+    StartedAuction,
+    #[msg("Insufficient NFT")]
+    InsufficientNft
 }
