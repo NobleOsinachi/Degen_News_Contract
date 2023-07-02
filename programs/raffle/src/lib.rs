@@ -152,7 +152,7 @@ pub mod raffle {
         );
 
         // let nft_count = ctx.accounts.metadatas.len();
-        require(nft_count >= a_pool.min_nft_count, RaffleError::InsufficientNft);
+        require!(nft_count >= a_pool.min_nft_count, RaffleError::InsufficientNft);
 
         require!(amount > 0, RaffleError::InvalidAmount);
         if total_ticket != MAX_TOTAL_TICKET  {
