@@ -1,7 +1,7 @@
 use anchor_lang::prelude::*;
 
 use crate::constants::*;
-/// space: 4258
+/// space: 4290
 #[account(zero_copy)]
 // #[repr(packed)]
 pub struct Pool {
