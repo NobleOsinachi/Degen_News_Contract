@@ -25,8 +25,8 @@ pub mod auction {
         auction_id: u64, 
         start_time: u32,
         end_time: u32, 
+        min_price: u64,
         min_nft_count: u32,
-        min_price: u64
     ) -> Result<()> {
         let mut a_pool = ctx.accounts.pool.load_init()?;
 
@@ -53,8 +53,8 @@ pub mod auction {
         ctx: Context<EditAuctionContext>, 
         start_time: u32,
         end_time: u32, 
+        min_price: u64,
         min_nft_count: u32,
-        min_price: u64
     ) -> Result<()> {
         let mut a_pool = ctx.accounts.pool.load_mut()?;
         let current_time = get_current_time()?;
@@ -71,9 +71,8 @@ pub mod auction {
 
         a_pool.start_time = start_time;
         a_pool.end_time = end_time;
-        a_pool.min_nft_count = min_nft_count;
         a_pool.min_price = min_price;
-
+        a_pool.min_nft_count = min_nft_count;
         Ok(())
     }
 
