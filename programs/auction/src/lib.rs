@@ -25,7 +25,7 @@ pub mod auction {
         auction_id: u64, 
         start_time: u32,
         end_time: u32, 
-        // min_nft_count: u32,
+        min_nft_count: u32,
         min_price: u64
     ) -> Result<()> {
         let mut a_pool = ctx.accounts.pool.load_init()?;
@@ -44,7 +44,7 @@ pub mod auction {
         a_pool.min_price = min_price;
         a_pool.count = 0;
         a_pool.state = 0;
-        a_pool.min_nft_count = 0;
+        a_pool.min_nft_count = min_nft_count;
         token::transfer(ctx.accounts.transfer_context(), 1)?;
         Ok(())
     }
@@ -53,7 +53,7 @@ pub mod auction {
         ctx: Context<EditAuctionContext>, 
         start_time: u32,
         end_time: u32, 
-        // min_nft_count: u32,
+        min_nft_count: u32,
         min_price: u64
     ) -> Result<()> {
         let mut a_pool = ctx.accounts.pool.load_mut()?;
@@ -71,7 +71,7 @@ pub mod auction {
 
         a_pool.start_time = start_time;
         a_pool.end_time = end_time;
-        // a_pool.min_nft_count = min_nft_count;
+        a_pool.min_nft_count = min_nft_count;
         a_pool.min_price = min_price;
 
         Ok(())
@@ -115,7 +115,7 @@ pub mod auction {
         Ok(())
     }
 
-    pub fn create_bid(ctx: Context<CreateBidContext>, price: u64) -> Result<()> {
+    pub fn create_bid(ctx: Context<CreateBidContext>, price: u64, nft_count: u32) -> Result<()> {
         let mut a_pool = ctx.accounts.pool.load_mut()?;
         let a_bidder = &ctx.accounts.bidder;
 
@@ -132,7 +132,7 @@ pub mod auction {
             AuctionError::OverMaxCount
         );
 
-        // require!(nft_count >= a_pool.min_nft_count, AuctionError::InsufficientNft);
+        require!(nft_count >= a_pool.min_nft_count, AuctionError::InsufficientNft);
 
         token::transfer(ctx.accounts.transfer_context(), price)?;
 
@@ -145,7 +145,7 @@ pub mod auction {
         Ok(())
     }
 
-    pub fn update_bid(ctx: Context<UpdateBidContext>, price: u64) -> Result<()> {
+    pub fn update_bid(ctx: Context<UpdateBidContext>, price: u64, nft_count: u32) -> Result<()> {
         let a_bidder = &ctx.accounts.bidder;
         
         let current_time = get_current_time()?;
@@ -163,7 +163,7 @@ pub mod auction {
             old_price = a_pool.update_bid(a_bidder.to_account_info().key(), price)?;
             require!(old_price != 0, AuctionError::UpdateBidError);
             
-            // require!(nft_count >= a_pool.min_nft_count, AuctionError::InsufficientNft);
+            require!(nft_count >= a_pool.min_nft_count, AuctionError::InsufficientNft);
         }
         {
             let a_pool = ctx.accounts.pool.load()?;
