@@ -140,7 +140,6 @@ pub mod auction {
         require!(result == true, AuctionError::CreateBidError);
 
         a_pool.count += 1;
-        msg!("count {}", a_pool.count);
         Ok(())
     }
 
