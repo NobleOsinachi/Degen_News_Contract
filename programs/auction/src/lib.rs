@@ -115,7 +115,7 @@ pub mod auction {
         Ok(())
     }
 
-    pub fn create_bid(ctx: Context<CreateBidContext>, price: u64, nft_count: u32) -> Result<()> {
+    pub fn create_bid(ctx: Context<CreateBidContext>, price: u64) -> Result<()> {
         let mut a_pool = ctx.accounts.pool.load_mut()?;
         let a_bidder = &ctx.accounts.bidder;
 
@@ -145,7 +145,7 @@ pub mod auction {
         Ok(())
     }
 
-    pub fn update_bid(ctx: Context<UpdateBidContext>, price: u64, nft_count: u32) -> Result<()> {
+    pub fn update_bid(ctx: Context<UpdateBidContext>, price: u64) -> Result<()> {
         let a_bidder = &ctx.accounts.bidder;
         
         let current_time = get_current_time()?;
