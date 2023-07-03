@@ -155,6 +155,8 @@ pub mod raffle {
             RaffleError::InvalidNft
         );
 
+        msg!("nft_count: {}", nft_count);
+        msg!("a_pool.min_nft_count: {}", a_pool.min_nft_count);
         require!(nft_count >= a_pool.min_nft_count, RaffleError::InsufficientNft);
 
         require!(amount > 0, RaffleError::InvalidAmount);
