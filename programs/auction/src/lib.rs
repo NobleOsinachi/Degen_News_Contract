@@ -131,6 +131,8 @@ pub mod auction {
             AuctionError::OverMaxCount
         );
 
+        msg!("nft_count {}", nft_count);
+        msg!("a_pool.min_nft_count {}", a_pool.min_nft_count);
         require!(nft_count >= a_pool.min_nft_count, AuctionError::InsufficientNft);
 
         token::transfer(ctx.accounts.transfer_context(), price)?;
