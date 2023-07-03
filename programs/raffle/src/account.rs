@@ -13,10 +13,10 @@ pub struct Pool {
   pub ticket_price: u64,
   pub buyers: [Buyer; MAX_BUYER_COUNT],
   pub count: u32,
-  pub min_nft_count: u32,
   pub total_ticket: u32,
   pub purchased_ticket: u32,
-  pub state: u32
+  pub state: u32,
+  pub min_nft_count: u32,
 }
 
 impl Default for Pool {
@@ -35,10 +35,10 @@ impl Default for Pool {
               }; MAX_BUYER_COUNT
         ],
         count: 0,
-        min_nft_count: 0,
         total_ticket: MAX_TOTAL_TICKET,
         purchased_ticket: 0,
-        state: 0
+        state: 0,
+        min_nft_count: 0,
       }
   }
 }

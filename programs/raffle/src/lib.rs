@@ -26,9 +26,9 @@ pub mod raffle {
         raffle_id: u64,
         start_time: u32,
         end_time: u32,
-        // min_nft_count: u32, 
         total_ticket: Option<u32>,
-        price: u64
+        price: u64,
+        min_nft_count: u32
     ) -> Result<()> {
         let mut a_pool = ctx.accounts.pool.load_init()?;
 
@@ -44,7 +44,6 @@ pub mod raffle {
         a_pool.mint = a_mint.to_account_info().key();
         a_pool.ticket_price = price;
         a_pool.count = 0;
-        // a_pool.min_nft_count = min_nft_count;
         if total_ticket.is_some() {
             a_pool.total_ticket = total_ticket.unwrap();
         }
@@ -53,6 +52,7 @@ pub mod raffle {
         }
         a_pool.purchased_ticket = 0;
         a_pool.state = 0;
+        a_pool.min_nft_count = min_nft_count;
         token::transfer(ctx.accounts.transfer_context(), 1)?;
         Ok(())
     }
@@ -62,8 +62,8 @@ pub mod raffle {
         start_time: u32,
         end_time: u32, 
         total_ticket: Option<u32>,
-        // min_nft_count: u32,
-        price: u64
+        price: u64,
+        min_nft_count: u32
     ) -> Result<()> {
         let mut a_pool = ctx.accounts.pool.load_mut()?;
         let current_time = get_current_time()?;
@@ -80,7 +80,6 @@ pub mod raffle {
 
         a_pool.start_time = start_time;
         a_pool.end_time = end_time;
-        // a_pool.min_nft_count = min_nft_count;
         if total_ticket.is_some() {
             a_pool.total_ticket = total_ticket.unwrap();
         }
@@ -88,6 +87,7 @@ pub mod raffle {
             a_pool.total_ticket = MAX_TOTAL_TICKET;
         }
         a_pool.ticket_price = price;
+        a_pool.min_nft_count = min_nft_count;
 
         Ok(())
     }
@@ -155,7 +155,7 @@ pub mod raffle {
             RaffleError::InvalidNft
         );
 
-        // require!(nft_count >= a_pool.min_nft_count, RaffleError::InsufficientNft);
+        require!(nft_count >= a_pool.min_nft_count, RaffleError::InsufficientNft);
 
         require!(amount > 0, RaffleError::InvalidAmount);
         if total_ticket != MAX_TOTAL_TICKET  {
