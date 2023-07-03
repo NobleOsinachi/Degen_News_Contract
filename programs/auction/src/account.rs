@@ -9,11 +9,11 @@ pub struct Pool {
   pub mint: Pubkey,
   pub start_time: u32,
   pub end_time: u32,
-  // pub min_nft_count: u32,
   pub min_price: u64,
   pub bids: [Bid; MAX_BID_COUNT],
   pub count: u32,
-  pub state: u32
+  pub state: u32,
+  pub min_nft_count: u32
 }
 
 impl Default for Pool {
@@ -24,7 +24,6 @@ impl Default for Pool {
           mint: anchor_lang::solana_program::pubkey!("3ttYrBAp5D2sTG2gaBjg8EtrZecqBQSBuFRhsqHWPYxX"),
           start_time: 0,
           end_time: 0,
-          // min_nft_count: 0,
           min_price: 0,
           bids: [
                 Bid {
@@ -32,7 +31,8 @@ impl Default for Pool {
                 }; MAX_BID_COUNT
           ],
           count: 0,
-          state: 0
+          state: 0,
+          min_nft_count: 0
       }
   }
 }

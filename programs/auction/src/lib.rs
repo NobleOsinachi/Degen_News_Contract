@@ -40,11 +40,11 @@ pub mod auction {
         a_pool.auction_id = auction_id;
         a_pool.start_time = start_time;
         a_pool.end_time = end_time;
-        // a_pool.min_nft_count = min_nft_count;
         a_pool.mint = a_mint.to_account_info().key();
         a_pool.min_price = min_price;
         a_pool.count = 0;
         a_pool.state = 0;
+        a_pool.min_nft_count = 0;
         token::transfer(ctx.accounts.transfer_context(), 1)?;
         Ok(())
     }
