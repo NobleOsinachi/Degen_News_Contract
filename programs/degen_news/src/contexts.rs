@@ -16,7 +16,7 @@ pub struct CreateNewsContext<'info> {
     &news_id.to_le_bytes(), 
     reporter.key().as_ref()], 
     bump, 
-    payer = reporer, 
+    payer = reporter, 
     space = size_of::<Pool>() + 8
   )]
   pub pool: AccountLoader<'info, Pool>,

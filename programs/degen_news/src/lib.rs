@@ -86,6 +86,7 @@ pub mod degen_news {
     pub fn publish_news(ctx: Context<PublishNewsContext>) -> Result<()> {
         
         let mut a_pool = ctx.accounts.pool.load_mut()?;
+        let system_program = &ctx.accounts.system_program;
 
         let current_time = get_current_time()?;
 
