@@ -9,7 +9,7 @@ url = "https://api.apr.dev"
 
 [provider]
 cluster = "https://api.devnet.solana.com"
-wallet = "/home/messi/dev_wallet.json"
+wallet = "/home/messi/dev-wallet.json"
 
 [scripts]
 test = "yarn run ts-mocha -p ./tsconfig.json -t 1000000 tests/**/*.ts"
