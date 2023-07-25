@@ -69,6 +69,15 @@ pub mod degen_news {
         Ok(())
     }
 
+    pub fn deny_news(
+        ctx: Context<DenyNewsContext>
+    ) -> Result<()> {
+        let mut a_pool = ctx.accounts.pool.load_init()?;
+
+        a_pool.state = 3;
+        Ok(())
+    }
+
     pub fn publish_news(ctx: Context<PublishNewsContext>) -> Result<()> {
         
         let mut a_pool = ctx.accounts.pool.load_mut()?;
@@ -79,7 +88,7 @@ pub mod degen_news {
             DegenNewsError::NotApprovedDegenNews
         );
         
-        a_pool.state = 3;
+        a_pool.state = 4;
         
         let cpi_ctx = CpiContext::new(
             system_program.to_account_info(),
