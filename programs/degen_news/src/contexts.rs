@@ -19,7 +19,8 @@ pub struct CreateNewsContext<'info> {
     payer = reporer, 
     space = size_of::<Pool>() + 8
   )]
-  pub pool: AccountLoader<'info, Pool>
+  pub pool: AccountLoader<'info, Pool>,
+  pub system_program: Program<'info, System>
 }
 
 #[derive(Accounts)]
@@ -27,7 +28,8 @@ pub struct EditNewsContext<'info> {
   #[account(mut)]
   pub reporter: Signer<'info>,
   #[account(mut)]
-  pub pool: AccountLoader<'info, Pool>
+  pub pool: AccountLoader<'info, Pool>,
+  pub system_program: Program<'info, System>
 }
 
 #[derive(Accounts)]
@@ -36,6 +38,7 @@ pub struct DeleteNewsContext<'info> {
   pub reporter: Signer<'info>,
   #[account(mut)]
   pub pool: AccountLoader<'info, Pool>,
+  pub system_program: Program<'info, System>
 }
 
 #[derive(Accounts)]
@@ -43,7 +46,8 @@ pub struct ApproveNewsContext<'info> {
   #[account(mut, constraint = senior.key() == SENIOR_KEY)]
   pub senior: Signer<'info>,
   #[account(mut)]
-  pub pool: AccountLoader<'info, Pool>
+  pub pool: AccountLoader<'info, Pool>,
+  pub system_program: Program<'info, System>,
 }
 
 #[derive(Accounts)]
@@ -53,5 +57,6 @@ pub struct PublishNewsContext<'info> {
   #[account(mut)]
   pub reporter: AccountInfo<'info>,
   #[account(mut)]
-  pub pool: AccountLoader<'info, Pool>
+  pub pool: AccountLoader<'info, Pool>,
+  pub system_program: Program<'info, System>,
 }

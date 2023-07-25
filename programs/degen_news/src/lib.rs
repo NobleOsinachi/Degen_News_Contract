@@ -12,7 +12,7 @@ use utils::*;
 use errors::*;
 use constants::*;
 
-declare_id!("8KJS7yuvn7tW68TKU2FBAgd6JtePAEbMPDC98RRJxkvt");
+declare_id!("CKRFPaveQYEVgcArmPWeBrnxQESUBki8LJzLcnxujA6j");
 
 #[program]
 pub mod degen_news {
