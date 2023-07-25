@@ -54,17 +54,14 @@ pub mod degen_news {
         ctx: Context<DeleteNewsContext>
     ) -> Result<()> {
         
-        let a_pool = ctx.accounts.pool.load()?;
         let a_reporter = &ctx.accounts.reporter;
-
         ctx.accounts.pool.close(a_reporter.to_account_info())?;
         
         Ok(())
     }
 
     pub fn approve_news(
-        ctx: Context<ApproveNewsContext>, 
-        news_id: u64,
+        ctx: Context<ApproveNewsContext>
     ) -> Result<()> {
         let mut a_pool = ctx.accounts.pool.load_init()?;
 
