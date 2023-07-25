@@ -57,7 +57,7 @@ pub mod degen_news {
         
         let a_pool = ctx.accounts.pool.load()?;
 
-        let a_reporter = ctx.accounts.reporter;
+        let a_reporter = &ctx.accounts.reporter;
         let current_time = get_current_time()?;
 
         let clone_news_id = a_pool.news_id;
