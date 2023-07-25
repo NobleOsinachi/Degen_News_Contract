@@ -19,7 +19,7 @@ impl Default for Pool {
           created_at: 0,
           updated_at: 0,
           reporter: '',
-          state: 
+          state: 0
       }
   }
 }

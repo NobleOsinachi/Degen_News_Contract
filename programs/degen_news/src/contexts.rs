@@ -23,7 +23,7 @@ pub struct CreateNewsContext<'info> {
 }
 
 #[derive(Accounts)]
-pub struct EditAuctionContext<'info> {
+pub struct EditNewsContext<'info> {
   #[account(mut)]
   pub reporter: Signer<'info>,
   #[account(mut)]
@@ -39,7 +39,7 @@ pub struct DeleteNewsContext<'info> {
 }
 
 #[derive(Accounts)]
-pub struct AppproveNewsContext<'info> {
+pub struct ApproveNewsContext<'info> {
   #[account(mut, constraint = senior.key() == SENIOR_KEY)]
   pub senior: Signer<'info>,
   #[account(mut)]
