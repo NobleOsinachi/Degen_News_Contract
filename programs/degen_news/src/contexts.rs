@@ -54,6 +54,7 @@ pub struct ApproveNewsContext<'info> {
 pub struct PublishNewsContext<'info> {
   #[account(mut, constraint = admin.key() == ADMIN_KEY)]
   pub admin: Signer<'info>,
+    /// CHECK: it's not dangerous
   #[account(mut)]
   pub reporter: AccountInfo<'info>,
   #[account(mut)]
