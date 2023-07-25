@@ -16,9 +16,9 @@ impl Default for Pool {
   fn default() -> Pool {
       Pool {
           news_id: 0,
+          reporter: anchor_lang::solana_program::pubkey!("3ttYrBAp5D2sTG2gaBjg8EtrZecqBQSBuFRhsqHWPYxX"),
           created_at: 0,
           updated_at: 0,
-          reporter: anchor_lang::solana_program::pubkey!("3ttYrBAp5D2sTG2gaBjg8EtrZecqBQSBuFRhsqHWPYxX"),
           state: 0
       }
   }

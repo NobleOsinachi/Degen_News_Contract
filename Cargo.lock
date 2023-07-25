@@ -225,7 +225,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "auction"
+name = "degen_news"
 version = "0.1.0"
 dependencies = [
  "anchor-lang",
