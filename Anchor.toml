@@ -2,7 +2,7 @@
 seeds = false
 skip-lint = false
 [programs.devnet]
-degen_news = "CKRFPaveQYEVgcArmPWeBrnxQESUBki8LJzLcnxujA6j"
+degen_news = "8HZqEJqtG49XeXHY4277jv6VQsMz9rwLq2z4tZYR8DQv"
 
 [registry]
 url = "https://api.apr.dev"
