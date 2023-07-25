@@ -2,15 +2,14 @@
 seeds = false
 skip-lint = false
 [programs.devnet]
-raffle = "9XmsktwqP1zuPTGhfCgSKVBh5HHKVbiCqeRqzCY8qpB"
-auction = "2pKctoN7q3VoqWq78BKLGdwmGfzE2UHrPphqTm4D7pjH"
+degen_news = "CKRFPaveQYEVgcArmPWeBrnxQESUBki8LJzLcnxujA6j"
 
 [registry]
 url = "https://api.apr.dev"
 
 [provider]
 cluster = "https://api.devnet.solana.com"
-wallet = "/home/messi/dev-wallet.json"
+wallet = "/home/messi/dev_wallet.json"
 
 [scripts]
 test = "yarn run ts-mocha -p ./tsconfig.json -t 1000000 tests/**/*.ts"
