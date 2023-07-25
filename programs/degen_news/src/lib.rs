@@ -11,7 +11,7 @@ use utils::*;
 use errors::*;
 use constants::*;
 
-declare_id!("CKRFPaveQYEVgcArmPWeBrnxQESUBki8LJzLcnxujA6j");
+declare_id!("");
 
 #[program]
 pub mod degen_news {
