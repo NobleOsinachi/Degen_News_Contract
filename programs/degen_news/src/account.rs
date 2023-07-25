@@ -1,6 +1,5 @@
 use anchor_lang::prelude::*;
 
-use crate::constants::*;
 #[account(zero_copy)]
 // #[repr(packed)]
 pub struct Pool {

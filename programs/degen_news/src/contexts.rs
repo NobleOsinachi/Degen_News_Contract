@@ -1,6 +1,4 @@
 use anchor_lang::prelude::*;
-use anchor_spl::token::{TokenAccount, Token, Mint, Transfer};
-use anchor_spl::associated_token::AssociatedToken;
 use std::mem::size_of;
 
 use crate::account::*;

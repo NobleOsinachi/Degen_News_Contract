@@ -1,5 +1,4 @@
 use anchor_lang::prelude::*;
-use anchor_spl::token::{self};
 
 pub mod contexts;
 pub mod utils;
@@ -30,6 +29,7 @@ pub mod degen_news {
         let current_time = get_current_time()?;
 
         a_pool.news_id = news_id;
+        a_pool.reporter = a_reporter.to_account_info().key();
         a_pool.created_at = current_time;
         a_pool.updated_at = current_time;
         a_pool.state = 0;
@@ -42,7 +42,6 @@ pub mod degen_news {
     ) -> Result<()> {
         let mut a_pool = ctx.accounts.pool.load_init()?;
 
-        let a_reporter = &ctx.accounts.reporter;
         let current_time = get_current_time()?;
 
         a_pool.news_id = news_id;
@@ -56,17 +55,7 @@ pub mod degen_news {
     ) -> Result<()> {
         
         let a_pool = ctx.accounts.pool.load()?;
-
         let a_reporter = &ctx.accounts.reporter;
-        let current_time = get_current_time()?;
-
-        let clone_news_id = a_pool.news_id;
-        let (_pool, bump) = Pubkey::find_program_address(
-            &[POOL_SEED.as_ref(), 
-            &a_pool.news_id.to_le_bytes(), 
-            a_pool.reporter.as_ref()], 
-            ctx.program_id
-        );
 
         ctx.accounts.pool.close(a_reporter.to_account_info())?;
         
@@ -87,8 +76,6 @@ pub mod degen_news {
         
         let mut a_pool = ctx.accounts.pool.load_mut()?;
         let system_program = &ctx.accounts.system_program;
-
-        let current_time = get_current_time()?;
 
         require!(
             a_pool.state == 2, 
