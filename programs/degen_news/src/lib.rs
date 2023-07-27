@@ -40,7 +40,7 @@ pub mod degen_news {
         ctx: Context<EditNewsContext>, 
         news_id: u64, 
     ) -> Result<()> {
-        let mut a_pool = ctx.accounts.pool.load_init()?;
+        let mut a_pool = ctx.accounts.pool.load_mut()?;
 
         let current_time = get_current_time()?;
 
@@ -63,7 +63,7 @@ pub mod degen_news {
     pub fn approve_news(
         ctx: Context<ApproveNewsContext>
     ) -> Result<()> {
-        let mut a_pool = ctx.accounts.pool.load_init()?;
+        let mut a_pool = ctx.accounts.pool.load_mut()?;
 
         a_pool.state = 2;
         Ok(())
@@ -72,7 +72,7 @@ pub mod degen_news {
     pub fn deny_news(
         ctx: Context<DenyNewsContext>
     ) -> Result<()> {
-        let mut a_pool = ctx.accounts.pool.load_init()?;
+        let mut a_pool = ctx.accounts.pool.load_mut()?;
 
         a_pool.state = 3;
         Ok(())
