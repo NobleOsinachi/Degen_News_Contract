@@ -44,8 +44,7 @@ pub struct ApproveNewsContext<'info> {
   #[account(mut, constraint = senior.key() == SENIOR_KEY)]
   pub senior: Signer<'info>,
   #[account(mut)]
-  pub pool: AccountLoader<'info, Pool>,
-  pub system_program: Program<'info, System>,
+  pub pool: AccountLoader<'info, Pool>
 }
 
 #[derive(Accounts)]
