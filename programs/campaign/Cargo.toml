@@ -1,12 +1,12 @@
 [package]
-name = "degen_news"
+name = "campaign"
 version = "0.1.0"
 description = "Created with Anchor"
 edition = "2021"
 
 [lib]
 crate-type = ["cdylib", "lib"]
-name = "degen_news"
+name = "campaign"
 
 [features]
 no-entrypoint = []

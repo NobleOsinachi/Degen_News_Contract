@@ -67,3 +67,13 @@ pub struct PublishNewsContext<'info> {
   pub pool: AccountLoader<'info, Pool>,
   pub system_program: Program<'info, System>,
 }
+
+#[derive(Accounts)]
+pub struct SendTipContext<'info> {
+  #[account(mut)]
+  pub user: Signer<'info>,
+    /// CHECK: it's not dangerous
+  #[account(mut)]
+  pub reporter: AccountInfo<'info>,
+  pub system_program: Program<'info, System>,
+}

@@ -14,7 +14,7 @@ use constants::*;
 declare_id!("5ddqLma91s4LzGLBwGrmzTBptRnaVnz9dXPF1KojV6Aw");
 
 #[program]
-pub mod degen_news {
+pub mod news {
     use super::*;
 
     use anchor_lang::AccountsClose;
@@ -85,7 +85,7 @@ pub mod degen_news {
 
         require!(
             a_pool.state == 2, 
-            DegenNewsError::NotApprovedDegenNews
+            NewsError::NotApprovedNews
         );
         
         a_pool.state = 4;
@@ -99,6 +99,23 @@ pub mod degen_news {
         );
 
         anchor_lang::system_program::transfer(cpi_ctx, FIXED_SOL)?;
+
+        Ok(())
+    }
+
+    pub fn send_tip(
+        ctx: Context<SendTipContext>, 
+        price: u64,
+    ) -> Result<()> {
+        let cpi_ctx = CpiContext::new(
+            system_program.to_account_info(),
+            anchor_lang::system_program::Transfer {
+                from: ctx.accounts.user.to_account_info(),
+                to: ctx.accounts.reporter.to_account_info()
+            }
+        );
+
+        anchor_lang::system_program::transfer(cpi_ctx, price)?;
 
         Ok(())
     }
