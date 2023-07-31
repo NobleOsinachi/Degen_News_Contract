@@ -46,9 +46,8 @@ pub struct DeleteCampaignContext<'info> {
 pub struct ApproveCampaignContext<'info> {
   #[account(mut, constraint = admin.key() == ADMIN_KEY)]
   pub admin: Signer<'info>,
-  /// CHECK: it's not dangerous
   #[account(mut)]
-  pub vault: AccountInfo<'info>,
+  pub vault: Signer<'info>,
   #[account(mut)]
   pub pool: AccountLoader<'info, Pool>,
   pub system_program: Program<'info, System>,
@@ -61,9 +60,8 @@ pub struct DenyCampaignContext<'info> {
   /// CHECK: it's not dangerous
   #[account(mut)]
   pub advertiser: AccountInfo<'info>,
-  /// CHECK: it's not dangerous
   #[account(mut)]
-  pub vault: AccountInfo<'info>,
+  pub vault: Signer<'info>,
   #[account(mut)]
   pub pool: AccountLoader<'info, Pool>,
   pub system_program: Program<'info, System>
