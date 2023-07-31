@@ -107,6 +107,7 @@ pub mod news {
         ctx: Context<SendTipContext>, 
         price: u64,
     ) -> Result<()> {
+        let system_program = &ctx.accounts.system_program;
         let cpi_ctx = CpiContext::new(
             system_program.to_account_info(),
             anchor_lang::system_program::Transfer {
