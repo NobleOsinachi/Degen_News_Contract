@@ -2,8 +2,8 @@
 seeds = false
 skip-lint = false
 [programs.devnet]
-news = "5ddqLma91s4LzGLBwGrmzTBptRnaVnz9dXPF1KojV6Aw"
-campaign = "5ddqLma91s4LzGLBwGrmzTBptRnaVnz9dXPF1KojV6Aw"
+news = "GU9hKq1tHquQr42P9v6odWWW5cFrW55vcxS3VLrfQzjR"
+campaign = "Cm54nANsmCodcqRgajkm7NHeZisRYPyRQnBRcEBFZ1s6"
 
 [registry]
 url = "https://api.apr.dev"
