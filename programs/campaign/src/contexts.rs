@@ -54,7 +54,7 @@ pub struct DenyCampaignContext<'info> {
   pub admin: Signer<'info>,
   /// CHECK: it's not dangerous
   #[account(mut)]
-  pub advertiser AccountInfo<'info>,
+  pub advertiser: AccountInfo<'info>,
   #[account(mut)]
   pub pool: AccountLoader<'info, Pool>,
   pub system_program: Program<'info, System>
