@@ -44,7 +44,8 @@ pub struct ApproveCampaignContext<'info> {
   #[account(mut, constraint = admin.key() == ADMIN_KEY)]
   pub admin: Signer<'info>,
   #[account(mut)]
-  pub pool: AccountLoader<'info, Pool>
+  pub pool: AccountLoader<'info, Pool>,
+  pub system_program: Program<'info, System>,
 }
 
 #[derive(Accounts)]
@@ -56,5 +57,5 @@ pub struct DenyCampaignContext<'info> {
   pub advertiser AccountInfo<'info>,
   #[account(mut)]
   pub pool: AccountLoader<'info, Pool>,
-  pub system_program: Program<'info, System>,
+  pub system_program: Program<'info, System>
 }
