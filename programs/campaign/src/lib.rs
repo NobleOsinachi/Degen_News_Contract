@@ -24,6 +24,7 @@ pub mod campaign {
         campaign_id: u64,
     ) -> Result<()> {
         let mut a_pool = ctx.accounts.pool.load_init()?;
+        let system_program = &ctx.accounts.system_program;
 
         let a_advertiser = &ctx.accounts.advertiser;
         let current_time = get_current_time()?;
