@@ -9,6 +9,9 @@ use crate::constants::*;
 pub struct CreateCampaignContext<'info> {
   #[account(mut)]
   pub advertiser: Signer<'info>,
+  /// CHECK: it's not dangerous
+  #[account(mut)]
+  pub vault: AccountInfo<'info>,
   #[account(init, seeds = [
     POOL_SEED.as_bytes(), 
     &campaign_id.to_le_bytes(), 
@@ -43,6 +46,9 @@ pub struct DeleteCampaignContext<'info> {
 pub struct ApproveCampaignContext<'info> {
   #[account(mut, constraint = admin.key() == ADMIN_KEY)]
   pub admin: Signer<'info>,
+  /// CHECK: it's not dangerous
+  #[account(mut)]
+  pub vault: AccountInfo<'info>,
   #[account(mut)]
   pub pool: AccountLoader<'info, Pool>,
   pub system_program: Program<'info, System>,
@@ -55,6 +61,9 @@ pub struct DenyCampaignContext<'info> {
   /// CHECK: it's not dangerous
   #[account(mut)]
   pub advertiser: AccountInfo<'info>,
+  /// CHECK: it's not dangerous
+  #[account(mut)]
+  pub vault: AccountInfo<'info>,
   #[account(mut)]
   pub pool: AccountLoader<'info, Pool>,
   pub system_program: Program<'info, System>

@@ -39,7 +39,7 @@ pub mod campaign {
             system_program.to_account_info(),
             anchor_lang::system_program::Transfer {
                 from: ctx.accounts.advertiser.to_account_info(),
-                to: ctx.accounts.pool.to_account_info()
+                to: ctx.accounts.vault.to_account_info()
             }
         );
 
@@ -80,26 +80,14 @@ pub mod campaign {
             a_pool.state = 2;
         }
         {
-            let a_pool = ctx.accounts.pool.load()?;
             let system_program = &ctx.accounts.system_program;
 
-            let (_pool, bump) = Pubkey::find_program_address(
-                &[POOL_SEED.as_ref(), 
-                &a_pool.campaign_id.to_le_bytes(), 
-                a_pool.advertiser.as_ref()], 
-                ctx.program_id
-            );
-            
-            let seeds = &[POOL_SEED.as_bytes(), &a_pool.campaign_id.to_le_bytes(), a_pool.advertiser.as_ref(), &[bump]];
-            let signer = &[&seeds[..]];
-
-             let cpi_ctx = CpiContext::new_with_signer (
+             let cpi_ctx = CpiContext::new (
                 system_program.to_account_info(),
                 anchor_lang::system_program::Transfer {
-                    from: ctx.accounts.pool.to_account_info(),
+                    from: ctx.accounts.vault.to_account_info(),
                     to: ctx.accounts.admin.to_account_info()
-                },
-                signer
+                }
             );
             anchor_lang::system_program::transfer(cpi_ctx, FIXED_SOL)?;
 
@@ -116,26 +104,14 @@ pub mod campaign {
             a_pool.state = 3;
         }
         {
-            let a_pool = ctx.accounts.pool.load()?;
             let system_program = &ctx.accounts.system_program;
 
-            let (_pool, bump) = Pubkey::find_program_address(
-                &[POOL_SEED.as_ref(), 
-                &a_pool.campaign_id.to_le_bytes(), 
-                a_pool.advertiser.as_ref()], 
-                ctx.program_id
-            );
-            
-            let seeds = &[POOL_SEED.as_bytes(), &a_pool.campaign_id.to_le_bytes(), a_pool.advertiser.as_ref(), &[bump]];
-            let signer = &[&seeds[..]];
-
-             let cpi_ctx = CpiContext::new_with_signer (
+             let cpi_ctx = CpiContext::new (
                 system_program.to_account_info(),
                 anchor_lang::system_program::Transfer {
-                    from: ctx.accounts.pool.to_account_info(),
+                    from: ctx.accounts.vault.to_account_info(),
                     to: ctx.accounts.advertiser.to_account_info()
-                },
-                signer
+                }
             );
             anchor_lang::system_program::transfer(cpi_ctx, FIXED_SOL)?;
 
